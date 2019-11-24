@@ -67,7 +67,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.*;
  
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements InitializingBean, DisposableBean {
 
 	private Timer backgroundTaskTimer;
