@@ -20,12 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vdenotaris.spring.boot.security.saml.web.stereotypes.CurrentUser;
+import java.security.Principal;
 
 @Controller
 public class LandingController {
@@ -35,14 +34,14 @@ public class LandingController {
 			.getLogger(LandingController.class);
 
 	@RequestMapping("/landing")
-	public String landing(@CurrentUser User user, Model model) {
+	public String landing(Principal principal, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth == null)
 			LOG.debug("Current authentication instance from security context is null");
 		else
 			LOG.debug("Current authentication instance from security context: "
 					+ this.getClass().getSimpleName());
-		model.addAttribute("username", 	user.getUsername());
+		model.addAttribute("username", 	principal.getName());
 		return "pages/landing";
 	}
 
